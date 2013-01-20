@@ -9,27 +9,29 @@ String description ="This sketch will randomly assign students (from students.tx
 Spacebrew spacebrewConnection;
 
 // array of students
-String students[];
-String groups[];
-boolean bGroupsPicked = false;
-int    groupSize;
-int    numGroups = 0;
+String   students[];
+String   groups[];
+boolean  bGroupsPicked = false;
+int      groupSize;
+int      numGroups = 0;
 
 // array of assignments
-String assignments[];
+String   assignments[];
 
 // visual stuff
-PFont arial;
-int   fontSize = 18;
-int   squareWidth;
-int   squareHeight = (fontSize + 10)*2;
-int   padding = 20;
+PFont   arial;
+int     fontSize = 18;
+int     squareWidth;
+int     squareHeight = (fontSize + 10)*2;
+int     padding      = 15;
 
 // randomize!
 boolean bRandomizing = false;
 int     currentIndex = 0;
 float   floatIndex   = 0;
 float   speed        = 0;
+PVector pos          = new PVector(150,150);
+Lights  lights;
 
 void setup() {
   size(1024, 768);
@@ -77,12 +79,15 @@ void setup() {
   
   // visual stuff
   arial = createFont("Arial", fontSize);
+  lights = new Lights(90,90, width-180, height-180, 0);
   textFont(arial);
-  squareWidth = (width-padding*3)/2;
+  squareWidth = (width-((int)pos.x * 2) - padding*3)/2;
 }
 
 void draw() {
-  background(0);
+  drawBackground();
+  
+  // update randomizer
   if ( (bRandomizing || speed > 0 ) && !bGroupsPicked ){
     floatIndex += speed;
     currentIndex = floor(floatIndex);
@@ -98,7 +103,7 @@ void draw() {
       }
     }
     
-    if ( bRandomizing && speed < 5 ){
+    if ( bRandomizing && speed < 10 ){
       speed += .1;
     } else if ( !bRandomizing ){
       speed *= .95;
@@ -109,17 +114,20 @@ void draw() {
     }
   }
   
-  int x = padding;
-  int y = padding + fontSize;
+  // turn lights on if we're randomizing!
+  if ( speed != 0 ) lights.bActive = true;
+  else lights.bActive = false;
+  
+  int x = (int) pos.x;
+  int y = (int) pos.y + fontSize;
    
   for (int i=0; i<numGroups; i++){
-    fill(255);
+    fill(10,50,11);
     text( assignments[i], x,y);
     y += 10;
     
-    
-    if ( currentIndex == i*2 ) fill(200);
-    else fill(150);
+    if ( currentIndex == i*2 ) fill(255);
+    else fill(130,159,180);
     rect(x,y,squareWidth,squareHeight/2);
   
     fill(0);
@@ -127,19 +135,31 @@ void draw() {
     
     y += squareHeight/2;
     
-    if ( currentIndex == i*2 + 1 ) fill(200);
-    else fill(150);
+    if ( currentIndex == i*2 + 1 ) fill(255);
+    else fill(45,86,117);
     rect(x,y,squareWidth,squareHeight/2);
     
     fill(0);
     text(groups[i*2 + 1], x+ 4, y+fontSize+ 2);
     y += squareHeight + padding * 1.5;
     
-    if ( y + squareHeight + padding * 1.5 >= height ){
-      y = padding + fontSize;; 
+    if ( y + squareHeight + padding > height - pos.y ){
+      y = (int) pos.y + fontSize;; 
       x += squareWidth + padding;
     }
   }
+}
+
+void drawBackground(){
+  // draw background
+  background(31,104,41);
+  noStroke();
+  fill(195,0,71);
+  rect(60,60, width-120, height-120, 40);
+  fill(207,196,38);
+  rect(120,120, width-240, height-240, 30);
+  
+  lights.draw();
 }
 
 void selectRandom(){
