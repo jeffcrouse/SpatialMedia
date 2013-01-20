@@ -1,11 +1,13 @@
-
-
-
 .DS_Store
 .AppleDouble
 .LSOverride
 Icon
 
+# XCode noise + OS X apps
+*.app
+DerivedData
+build
+xcuserdata
 
 # Thumbnails
 ._*

@@ -1,0 +1,3 @@
+ofxXmlSettings
+ofxLibwebsockets
+ofxSpacebrew
