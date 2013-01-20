@@ -10,7 +10,8 @@ Spacebrew spacebrewConnection;
 
 // array of students
 String   students[];
-String   groups[];
+Group    groups[];
+
 boolean  bGroupsPicked = false;
 int      groupSize;
 int      numGroups = 0;
@@ -63,12 +64,11 @@ void setup() {
     
     // need to make students an array that is length-1 (so we don't include that first line)
     students = new String[tempStudents.length - 1];
-    groups   = new String[tempStudents.length - 1];
     for (int i=1; i<tempStudents.length; i++){
       students[i-1] = tempStudents[i];
-      groups[i-1]   = ""; // fill in group array with empty strings
     }
     numGroups = ceil(students.length / groupSize);
+    
   }
   
   // load assignments
@@ -82,6 +82,25 @@ void setup() {
   lights = new Lights(90,90, width-180, height-180, 0);
   textFont(arial);
   squareWidth = (width-((int)pos.x * 2) - padding*3)/2;
+  
+  // setup groups!
+  groups   = new Group[numGroups];
+  int x = (int) pos.x;
+  int y = (int) pos.y + fontSize;
+  
+  for (int i=0; i<numGroups; i++){
+    groups[i] = new Group( x, y, squareWidth, squareHeight );
+    groups[i].assignment = assignments[i];
+    
+    y += 10;
+    y += squareHeight/2;
+    y += squareHeight + padding * 1.5;
+    
+    if ( y + squareHeight + padding > height - pos.y ){
+      y = (int) pos.y + fontSize;; 
+      x += squareWidth + padding;
+    }
+  }
 }
 
 void draw() {
@@ -89,6 +108,7 @@ void draw() {
   
   // update randomizer
   if ( (bRandomizing || speed > 0 ) && !bGroupsPicked ){
+    
     floatIndex += speed;
     currentIndex = floor(floatIndex);
     
@@ -96,12 +116,27 @@ void draw() {
       currentIndex -= students.length;
     }
     
-    while ( !groups[currentIndex].equals("") ){
+    int whichGroup = floor( currentIndex / 2);
+    boolean bStudentOne = currentIndex % 2 == 0;
+    boolean bNotPickedYet = (bStudentOne ? groups[whichGroup].studentOne == "" : groups[whichGroup].studentTwo == "");
+    
+    while ( !bNotPickedYet ){
       currentIndex++;
       while ( currentIndex >= students.length ){
         currentIndex -= students.length;
       }
+      whichGroup = floor( currentIndex / 2);
+      bStudentOne = currentIndex % 2 == 0;
+      bNotPickedYet = (bStudentOne ? groups[whichGroup].studentOne == "" : groups[whichGroup].studentTwo == "");
     }
+    
+    if ( bStudentOne ){
+      groups[whichGroup].studentOneSelected = true;
+      groups[whichGroup].studentTwoSelected = false;
+    } else {
+      groups[whichGroup].studentOneSelected = false;
+      groups[whichGroup].studentTwoSelected = true;
+    } 
     
     if ( bRandomizing && speed < 10 ){
       speed += .1;
@@ -122,31 +157,10 @@ void draw() {
   int y = (int) pos.y + fontSize;
    
   for (int i=0; i<numGroups; i++){
-    fill(10,50,11);
-    text( assignments[i], x,y);
-    y += 10;
+    groups[i].draw();
     
-    if ( currentIndex == i*2 ) fill(255);
-    else fill(130,159,180);
-    rect(x,y,squareWidth,squareHeight/2);
-  
-    fill(0);
-    text(groups[i*2], x + 4, y+fontSize+ 2);
-    
-    y += squareHeight/2;
-    
-    if ( currentIndex == i*2 + 1 ) fill(255);
-    else fill(45,86,117);
-    rect(x,y,squareWidth,squareHeight/2);
-    
-    fill(0);
-    text(groups[i*2 + 1], x+ 4, y+fontSize+ 2);
-    y += squareHeight + padding * 1.5;
-    
-    if ( y + squareHeight + padding > height - pos.y ){
-      y = (int) pos.y + fontSize;; 
-      x += squareWidth + padding;
-    }
+    // deselect
+    groups[i].studentOneSelected = groups[i].studentTwoSelected = false;
   }
 }
 
@@ -165,31 +179,48 @@ void drawBackground(){
 void selectRandom(){
   if ( bGroupsPicked) return;
   
-  while ( !groups[currentIndex].equals("") ){
+  int whichGroup = floor( currentIndex / 2);
+  boolean bStudentOne = currentIndex % 2 == 0;
+  boolean bNotPickedYet = (bStudentOne ? groups[whichGroup].studentOne == "" : groups[whichGroup].studentTwo == "");
+  
+  while ( !bNotPickedYet ){
     currentIndex++;
     if ( currentIndex >= students.length ){
       currentIndex = 0;
     }
+    whichGroup = floor( currentIndex / 2);
+    bStudentOne = currentIndex % 2 == 0;
+    bNotPickedYet = (bStudentOne ? groups[whichGroup].studentOne == "" : groups[whichGroup].studentTwo == "");
   }
   
   int random = int(random(students.length));
-   println( "select "+students[random] );
-   while ( students[random].equals("") ){
+  while ( students[random].equals("") ){
     random = int(random(students.length));
-    println( "select "+students[random] );
   }
   
-  println( "select "+students[random] );
+  if ( bStudentOne ){
+    groups[whichGroup].studentOne = students[random];
+  } else {
+    groups[whichGroup].studentTwo  = students[random];
+  } 
   
-  groups[currentIndex] = students[random];
+  // should we send to spacebrew now?
+
+  if ( !groups[whichGroup].studentOne.equals("") && !groups[whichGroup].studentTwo.equals("") ){
+    println("send to sb");
+    spacebrewConnection.send("selectedGroup", groups[whichGroup].studentOne+";"+ groups[whichGroup].studentTwo );
+  }
+  
   students[random] = "";
   
+  // see if we have picked all the groups
   int numPicked = 0;
   for (int i=0; i<groups.length; i++){
-    if (!groups[i].equals("")) numPicked++;
+    if ( !groups[i].studentOne.equals("") ) numPicked++;
+    if ( !groups[i].studentTwo.equals("") ) numPicked++;
   }
   
-  if ( numPicked == groups.length) bGroupsPicked = true;
+  if ( numPicked == students.length) bGroupsPicked = true;
 }
 
 void mousePressed(){
@@ -199,7 +230,6 @@ void mousePressed(){
 void mouseReleased(){
   bRandomizing = false;
 }
-
 
 void onRangeMessage( String name, int value ){
   println("got int message "+name +" : "+ value);
