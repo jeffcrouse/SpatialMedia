@@ -208,7 +208,7 @@ void selectRandom(){
 
   if ( !groups[whichGroup].studentOne.equals("") && !groups[whichGroup].studentTwo.equals("") ){
     println("send to sb");
-    spacebrewConnection.send("selectedGroup", groups[whichGroup].studentOne+";"+ groups[whichGroup].studentTwo );
+    spacebrewConnection.send("selectedGroup", groups[whichGroup].assignment +";" + groups[whichGroup].studentOne+";"+ groups[whichGroup].studentTwo );
   }
   
   students[random] = "";
@@ -237,6 +237,7 @@ void onRangeMessage( String name, int value ){
 
 void onBooleanMessage( String name, boolean value ){
   if ( name.equals("randomize") ){
+    println("random" +":"+ value);
     bRandomizing = value;
   }
 }
