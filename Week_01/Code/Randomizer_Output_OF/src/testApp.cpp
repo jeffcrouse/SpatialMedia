@@ -6,13 +6,14 @@ string description ="This sketch will randomly assign students (from students.tx
 
 //--------------------------------------------------------------
 void testApp::setup(){
-    ofSetFrameRate(60);
+    ofSetFrameRate(30);
     ofEnableSmoothing();
+    ofEnableAlphaBlending();
     
     bGroupsPicked   = false;
     numGroups       = 0;
-    fontSize        = 18;
-    squareHeight    = (fontSize + 10)*2;
+    fontSize        = 13;
+    squareHeight    = (fontSize + 12)*2;
     padding         = 15;
     
     // randomize!
@@ -42,14 +43,14 @@ void testApp::setup(){
     // load students
     vector<string> tempStudents = loadStrings( "students.txt" );
     
-    // null = file doesn't exist :(
+    // empty = file doesn't exist :(
     if ( tempStudents.size() > 0 ){
         groupSize = ofToInt(tempStudents[0]); // # of people in group is first line
         
         // need to make students an array that is length-1 (so we don't include that first line)
         tempStudents.erase(tempStudents.begin());
         students = tempStudents;
-        numGroups = ceil(students.size() / groupSize);
+        numGroups = ceil((float) students.size() / groupSize);
     }
     
     // load assignments
@@ -63,6 +64,8 @@ void testApp::setup(){
     lights = Lights(90,90, ofGetWidth()-180, ofGetHeight()-180, 0);
     squareWidth = (ofGetWidth()-((int)pos.x * 2) - padding*3)/2;
     
+    contestant = ContestantDisplay( "Arial.ttf", 25 );
+    
     // setup groups!
     int x = (int) pos.x;
     int y = (int) pos.y + fontSize;
@@ -74,29 +77,72 @@ void testApp::setup(){
         
         y += 10;
         y += squareHeight/2;
-        y += squareHeight + padding * 1.5;
+        y += squareHeight + padding;
         
         if ( y + squareHeight + padding > ofGetHeight() - pos.y ){
             y = (int) pos.y + fontSize;; 
             x += squareWidth + padding;
         }
     }
-}
-
-//--------------------------------------------------------------
-vector<string> testApp::loadStrings( string file ){
-    vector<string> ret;
-    ofBuffer temp = ofFile( file ).readToBuffer();
-    while ( !temp.isLastLine() ){
-        ret.push_back( temp.getNextLine() );
-        cout<<ret.back()<<endl;
-    }
-    return ret;
+    
+    // get started!
+    string upNext = selectContestant();
+    contestant.activate( upNext );
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     // update randomizer
+    randomize();
+}
+
+//--------------------------------------------------------------
+void testApp::draw(){
+    drawBackground();
+    // turn lights on if we're randomizing!
+    if ( speed != 0 ) lights.bActive = true;
+    else lights.bActive = false;
+    
+    int x = (int) pos.x;
+    int y = (int) pos.y + fontSize;
+    
+    for (int i=0; i<numGroups; i++){
+        groups[i].draw();
+        
+        // deselect
+        groups[i].studentOneSelected = groups[i].studentTwoSelected = false;
+    }
+    
+    contestant.draw();
+}
+
+//--------------------------------------------------------------
+string testApp::selectContestant(){
+    int random = int(ofRandom(students.size()));
+    while ( students[random] == "" ){
+        random = int(ofRandom(students.size()));
+    }
+    string toReturn = students[random];
+    students[random] = "";
+    return toReturn;
+}
+
+//--------------------------------------------------------------
+void testApp::drawBackground(){
+    // draw background
+    ofBackground(31,104,41);
+    ofSetColor(195,0,71);
+    ofRectRounded(60,60, ofGetWidth()-120, ofGetHeight()-120, 40);
+    ofSetColor(207,196,38);
+    ofRectRounded(120,120, ofGetWidth()-240, ofGetHeight()-240, 30);
+    
+    lights.draw();
+}
+
+//--------------------------------------------------------------
+void testApp::randomize(){
+    if ( bGroupsPicked) return;
+    
     if ( (bRandomizing || speed > 0 ) && !bGroupsPicked ){
         
         floatIndex += speed;
@@ -134,92 +180,43 @@ void testApp::update(){
             speed *= .95;
             if ( speed < .1 ){
                 speed = 0;
-                selectRandom();
+                
+                if ( bStudentOne ){
+                    groups[whichGroup].studentOne = contestant.current;
+                } else {
+                    groups[whichGroup].studentTwo  = contestant.current;
+                }
+                
+                // should we send to spacebrew now?
+                
+                if ( !(groups[whichGroup].studentOne == "") && !(groups[whichGroup].studentTwo  == "") ){
+                    spacebrewConnection.send("selectedGroup", "string", groups[whichGroup].studentOne+";"+ groups[whichGroup].studentTwo );
+                }
+                
+                // see if we have picked all the groups
+                int numPicked = 0;
+                for (int i=0; i<groups.size(); i++){
+                    if ( !(groups[i].studentOne == "") ) numPicked++;
+                    if ( !(groups[i].studentTwo == "") ) numPicked++;
+                }
+                
+                if ( numPicked == students.size()) bGroupsPicked = true;
+                
+                if ( !bGroupsPicked ){
+                    string upNext = selectContestant();
+                    contestant.activate( upNext );
+                }
             }
         }
     }
 }
 
 //--------------------------------------------------------------
-void testApp::draw(){
-    drawBackground();
-    // turn lights on if we're randomizing!
-    if ( speed != 0 ) lights.bActive = true;
-    else lights.bActive = false;
-    
-    int x = (int) pos.x;
-    int y = (int) pos.y + fontSize;
-    
-    for (int i=0; i<numGroups; i++){
-        groups[i].draw();
-        
-        // deselect
-        groups[i].studentOneSelected = groups[i].studentTwoSelected = false;
-    }
-}
-
-//--------------------------------------------------------------
-void testApp::drawBackground(){
-    // draw background
-    ofBackground(31,104,41);
-    ofSetColor(195,0,71);
-    ofRectRounded(60,60, ofGetWidth()-120, ofGetHeight()-120, 40);
-    ofSetColor(207,196,38);
-    ofRectRounded(120,120, ofGetWidth()-240, ofGetHeight()-240, 30);
-    
-    lights.draw();
-}
-
-//--------------------------------------------------------------
-void testApp::selectRandom(){
-    if ( bGroupsPicked) return;
-    
-    int whichGroup = floor( currentIndex / 2);
-    bool bStudentOne = currentIndex % 2 == 0;
-    bool bNotPickedYet = (bStudentOne ? groups[whichGroup].studentOne == "" : groups[whichGroup].studentTwo == "");
-    
-    while ( !bNotPickedYet ){
-        currentIndex++;
-        if ( currentIndex >= students.size() ){
-            currentIndex = 0;
-        }
-        whichGroup = floor( currentIndex / 2);
-        bStudentOne = currentIndex % 2 == 0;
-        bNotPickedYet = (bStudentOne ? groups[whichGroup].studentOne == "" : groups[whichGroup].studentTwo == "");
-    }
-    
-    int random = int(ofRandom(students.size()));
-    while ( students[random] == "" ){
-        random = int(ofRandom(students.size()));
-    }
-    
-    if ( bStudentOne ){
-        groups[whichGroup].studentOne = students[random];
-    } else {
-        groups[whichGroup].studentTwo  = students[random];
-    }
-    
-    // should we send to spacebrew now?
-    
-    if ( !(groups[whichGroup].studentOne == "") && !(groups[whichGroup].studentTwo  == "") ){
-        spacebrewConnection.send("selectedGroup", "string", groups[whichGroup].studentOne+";"+ groups[whichGroup].studentTwo );
-    }
-    
-    students[random] = "";
-    
-    // see if we have picked all the groups
-    int numPicked = 0;
-    for (int i=0; i<groups.size(); i++){
-        if ( !(groups[i].studentOne == "") ) numPicked++;
-        if ( !(groups[i].studentTwo == "") ) numPicked++;
-    }
-    
-    if ( numPicked == students.size()) bGroupsPicked = true;
-}
-
-//--------------------------------------------------------------
 void testApp::onMessage( Spacebrew::Message & m ){
-    
+    if ( m.name == "randomize" ){
+        bRandomizing = ofToBool(m.value);
+        contestant.deactivate();
+    }
 }
 
 //--------------------------------------------------------------
@@ -237,6 +234,7 @@ void testApp::mouseDragged(int x, int y, int button){}
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
     bRandomizing = true;
+    contestant.deactivate();
 }
 
 //--------------------------------------------------------------

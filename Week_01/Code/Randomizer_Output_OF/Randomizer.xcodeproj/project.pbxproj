@@ -16,6 +16,7 @@
 		9ef1133bc23669a5c94fe30f676125b8 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69668fde141262bc3c6ca9290e61cfa8 /* jsoncpp.cpp */; };
 		A9C653B616ACA4C300A64944 /* Group.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C653B416ACA4C300A64944 /* Group.cpp */; };
 		A9C653B916ACA4CF00A64944 /* Lights.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C653B716ACA4CF00A64944 /* Lights.cpp */; };
+		A9E8778816B5B49B0026B531 /* ContestantDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E8778616B5B49B0026B531 /* ContestantDisplay.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -137,6 +138,8 @@
 		A9C653B516ACA4C300A64944 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
 		A9C653B716ACA4CF00A64944 /* Lights.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lights.cpp; sourceTree = "<group>"; };
 		A9C653B816ACA4CF00A64944 /* Lights.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lights.h; sourceTree = "<group>"; };
+		A9E8778616B5B49B0026B531 /* ContestantDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ContestantDisplay.cpp; sourceTree = "<group>"; };
+		A9E8778716B5B49B0026B531 /* ContestantDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestantDisplay.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -498,6 +501,8 @@
 				A9C653B516ACA4C300A64944 /* Group.h */,
 				A9C653B716ACA4CF00A64944 /* Lights.cpp */,
 				A9C653B816ACA4CF00A64944 /* Lights.h */,
+				A9E8778616B5B49B0026B531 /* ContestantDisplay.cpp */,
+				A9E8778716B5B49B0026B531 /* ContestantDisplay.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -646,6 +651,7 @@
 				a08d840e5dc2c6a7f0e514bc0baa6921 /* ofxSpacebrew.cpp in Sources */,
 				A9C653B616ACA4C300A64944 /* Group.cpp in Sources */,
 				A9C653B916ACA4CF00A64944 /* Lights.cpp in Sources */,
+				A9E8778816B5B49B0026B531 /* ContestantDisplay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

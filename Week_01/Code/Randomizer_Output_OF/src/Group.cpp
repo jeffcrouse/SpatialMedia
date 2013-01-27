@@ -41,7 +41,7 @@ void Group::draw(){
     ofRect(x,y,w,h/2);
     
     ofSetColor(0);
-    font->drawString(studentOne, x + 4, y+font->getSize()+ 2);
+    font->drawString(studentOne, x + 4, y+font->getSize()+ 4);
     
     y += h/2;
     
@@ -50,5 +50,5 @@ void Group::draw(){
     ofRect(x,y,w,h/2);
     
     ofSetColor(0);
-    font->drawString(studentTwo, x+ 4, y+font->getSize()+ 2);
+    font->drawString(studentTwo, x+ 4, y+font->getSize()+ 4);
 };
