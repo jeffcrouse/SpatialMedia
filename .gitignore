@@ -2,6 +2,7 @@
 .AppleDouble
 .LSOverride
 Icon
+application.*
 
 # XCode noise + OS X apps
 *.app
