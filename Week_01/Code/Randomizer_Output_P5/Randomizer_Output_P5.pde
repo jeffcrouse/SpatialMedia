@@ -22,7 +22,7 @@ String   assignments[];
 // visual stuff
 ContestantDisplay contestant;
 PFont   arial;
-int     fontSize = 18;
+int     fontSize = 15;
 int     squareWidth;
 int     squareHeight = (fontSize + 10)*2;
 int     padding      = 15;
@@ -70,7 +70,7 @@ void setup() {
     for (int i=1; i<tempStudents.length; i++){
       students[i-1] = tempStudents[i];
     }
-    numGroups = ceil(students.length / groupSize);
+    numGroups = ceil((float) students.length / groupSize);
   }
   
   // load assignments
@@ -99,7 +99,7 @@ void setup() {
     
     y += 10;
     y += squareHeight/2;
-    y += squareHeight + padding * 1.5;
+    y += squareHeight;
     
     if ( y + squareHeight + padding > height - pos.y ){
       y = (int) pos.y + fontSize;; 
