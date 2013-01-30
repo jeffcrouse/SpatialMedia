@@ -17,7 +17,7 @@ ContestantDisplay::ContestantDisplay( string _font, int fontSize ){
 };
 
 void ContestantDisplay::draw(){
-    if ( bActive ){
+    if ( bActive && ofGetElapsedTimeMillis() - activated > activeDelay ){
         alpha += 10;
         if ( alpha > 255 ){
             alpha = 255;
@@ -41,7 +41,9 @@ void ContestantDisplay::draw(){
     }; ofPopStyle();
 };
 
-void ContestantDisplay::activate( string _current ){
+void ContestantDisplay::activate( string _current, int delay ){
+    activated = ofGetElapsedTimeMillis();
+    activeDelay     = delay;
     bActive = true;
     current = _current;
 }

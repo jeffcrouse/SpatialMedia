@@ -22,11 +22,12 @@ public:
     ContestantDisplay(){};
     ContestantDisplay( string _font, int fontSize );
     void draw();
-    void activate( string _current );
+    void activate( string _current, int delay = 0 );
     void deactivate();
     
 private:
     
+    int  activeDelay, activated;
     bool bActive;
 };
 

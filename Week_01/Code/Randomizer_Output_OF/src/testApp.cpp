@@ -190,7 +190,7 @@ void testApp::randomize(){
                 // should we send to spacebrew now?
                 
                 if ( !(groups[whichGroup].studentOne == "") && !(groups[whichGroup].studentTwo  == "") ){
-                    spacebrewConnection.send("selectedGroup", "string", groups[whichGroup].studentOne+";"+ groups[whichGroup].studentTwo );
+                    spacebrewConnection.send("selectedGroup", "string", groups[whichGroup].assignment +";" + groups[whichGroup].studentOne+";"+ groups[whichGroup].studentTwo );
                 }
                 
                 // see if we have picked all the groups
@@ -204,7 +204,7 @@ void testApp::randomize(){
                 
                 if ( !bGroupsPicked ){
                     string upNext = selectContestant();
-                    contestant.activate( upNext );
+                    contestant.activate( upNext, 2000 );
                 }
             }
         }
