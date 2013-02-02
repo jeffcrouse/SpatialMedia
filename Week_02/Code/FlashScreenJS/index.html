@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	    <title>Spacebrew Flashing Screen</title>
+
+	    <meta charset="utf-8">
+	    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" charset="utf-8" />
+	    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+		<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript" src="js/sb-1.0.1.min.js"></script>
+		<script type="text/javascript">
+			$(window).on("load", setup);
+      
+		      // Spacebrew Object
+		      var sb;
+		      var delay = 50;
+
+		      /**
+		       * setup Configure spacebrew connection and adds the mousedown listener.
+		       */
+		      function setup (){
+		        // create spacebrew client object
+		        sb = new Spacebrew.Client( "sandbox.spacebrew.cc", "Flash0");
+
+		        delay += parseInt(sb._name.substr(sb._name.indexOf("h")+1)) * 50;
+
+		        console.log ( delay );
+
+		        // set the base description
+		        sb.description("This app will flash the screen after a delay when it receives a 'flash' message");
+
+		        // configure the publication and subscription feeds
+		        sb.addSubscribe( "flash", "boolean" );
+
+		        // override Spacebrew events - this is how you catch events coming from Spacebrew
+		        sb.onBooleanMessage = onBooleanMessage;
+
+		        // connect to spacbrew
+		        sb.connect();
+		      }
+
+		      var changeTimeout = null;
+
+		      function setBackgroundBlack(){
+		      	console.log("black");
+		      	$("body").css("background-color", "#000");
+		      	changeTimeout = null;
+		      }
+
+		      function setBackgroundWhite(){
+		      	console.log("white");
+		      	$("body").css("background-color", "#FFF");
+		      	changeTimeout = window.setTimeout( setBackgroundBlack, 50);
+		      }
+
+		      /**
+		       * onBooleanMessage Function that is called whenever new spacebrew boolean messages are received.
+		       *          It accepts two parameters:
+		       * @param  {String} name    Holds name of the subscription feed channel
+		       * @param  {Boolean} value   Holds boolean message received from the subscription feed
+		       */
+		      function onBooleanMessage( name, value ){
+		      	if ( value ){
+		      		if ( changeTimeout != null ){
+		      			window.clearTimeout(changeTimeout);
+		      		}
+		      		changeTimeout = window.setTimeout( setBackgroundWhite, delay);
+		      	} else {
+
+		      	}
+		      }
+		</script>
+	</head>
+<body>
+</body>
+</html>
