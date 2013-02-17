@@ -9,6 +9,7 @@ application.*
 DerivedData
 build
 xcuserdata
+*.xcworkspace
 
 # Thumbnails
 ._*
