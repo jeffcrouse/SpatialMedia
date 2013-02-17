@@ -1,7 +1,5 @@
 #include "testApp.h"
 
-using namespace ofxTSPS;
-
 //--------------------------------------------------------------
 void testApp::setup(){
     ofBackground(0);
