@@ -1,0 +1,6 @@
+ofxAssimpModelLoader
+ofxOpenCv
+ofxXmlSettings
+ofxCv
+ofxMapamok
+ofxProCamToolkit
