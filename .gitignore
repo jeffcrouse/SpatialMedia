@@ -31,3 +31,5 @@ xcuserdata
 *.lai
 *.la
 *.a
+
+node_modules
