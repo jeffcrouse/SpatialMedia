@@ -40,7 +40,7 @@ http.createServer(app).listen(app.get('port'), function(){
 
 
 //
-// Now start up the Spacebrew client
+// 1.  Start up the Spacebrew client
 //
 
 var server = "sandbox.spacebrew.cc";
@@ -56,27 +56,28 @@ sb.connect();
 
 
 //
-// Now set up Twitter and access the Twitter Stream API
+// 2. Now set up Twitter and access the Twitter Stream API
 //
 
 // Configure Twitter
 var twit = new twitter({
-  consumer_key: 'CuJDkgecdDtVNVa3wrvtQ',
-  consumer_secret: 't9zzya77qkm7UkFmgQ0rniCziT11PoaUEQCthYGezY',
-  access_token_key: '761368-NJ95le3zIfMW5XbRXZrZeaFVjFZofEPT9UeQkRTq78',
-  access_token_secret: 'kW6MCgVAy9ZV0uTYTc8RDAFY8INFOQIMKYU4ZBOUTM'
+	consumer_key: 'CuJDkgecdDtVNVa3wrvtQ',
+	consumer_secret: 't9zzya77qkm7UkFmgQ0rniCziT11PoaUEQCthYGezY',
+	access_token_key: '761368-NJ95le3zIfMW5XbRXZrZeaFVjFZofEPT9UeQkRTq78',
+	access_token_secret: 'kW6MCgVAy9ZV0uTYTc8RDAFY8INFOQIMKYU4ZBOUTM'
 });
 
 
 // Start the twitter stream 
 // https://dev.twitter.com/docs/api/1.1/post/statuses/filter
-var filters = {'track':'spatial,media,nyu,itp'}
+var filters = {'track':'spatial,media,nyu,itp'};
 twit.stream('statuses/filter', filters, function(stream) {
-  stream.on('data', function (data) {
-    console.log(data.text);
-    if(sb._isConnected)
-      sb.send("tweet", "string", data.text); 
-  });;
+	stream.on('data', function (data) {
+		console.log(data.text);
+		if(sb._isConnected) {
+			sb.send("tweet", "string", data.text); 
+		}
+	});
 });
 
 
