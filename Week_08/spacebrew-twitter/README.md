@@ -17,4 +17,4 @@
 	                                                                                                 
 	                                                                                                             
 
-This app is essentailly the same as node-spacebrew except it implements the (statuses/filter)[https://dev.twitter.com/docs/api/1.1/post/statuses/filter] API method of the Twitter API using the [twittern](https://github.com/AvianFlu/ntwitter) nodejs module.  
+This app is essentailly the same as node-spacebrew except it implements the [statuses/filter](https://dev.twitter.com/docs/api/1.1/post/statuses/filter) API method of the Twitter API using the [twittern](https://github.com/AvianFlu/ntwitter) nodejs module.  
