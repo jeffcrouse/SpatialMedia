@@ -18,7 +18,7 @@
 	                                    \ \_\                                   
 	                                     \/_/                                   
 
-This example shows a simple implementation of [pySpacebrew](https://github.com/Spacebrew/pySpacebrew) and the Python Package [lxml](http://lxml.de/), so you will need to install lxml first.  You can do so using [the instructions here](http://lxml.de/installation.html), but it should be as easy as easy as running 
+This example shows a simple implementation of [pySpacebrew](https://github.com/Spacebrew/pySpacebrew) and the Python Package [lxml](http://lxml.de/), so you will need to install lxml first. You can do so using [the instructions here](http://lxml.de/installation.html), but it should be as easy as easy as running 
 
 ```
 pip install lxml
@@ -34,6 +34,8 @@ The app is supposed to scrape Craigslist pages and publish (via Spacebrew) new p
 
 Start with:
 
-```python spacebrew-casual.py```
+```
+python spacebrew-casual.py
+```
 
 Exit with Ctrl+c

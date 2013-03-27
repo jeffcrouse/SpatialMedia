@@ -33,15 +33,21 @@ For learning's sake, the following instructions will re-create the app contained
 	
 * Install the initial required modules by running the following command
 
-	```cd spacebrew-ticker && npm install```
+	```
+	cd spacebrew-ticker && npm install
+	```
 
 * Install the 'ws' module (it is required by spacebrew)
 	
-	```npm install ws --save```
+	```
+	npm install ws --save
+	```
 
 * Get *sb-1.0.3.js* from the lib folder in https://github.com/Spacebrew/spacebrew.js and put it in the root folder of your app
 
-	```curl -O https://raw.github.com/Spacebrew/spacebrew.js/master/library/sb-1.0.3.js```
+	```
+	curl -O https://raw.github.com/Spacebrew/spacebrew.js/master/library/sb-1.0.3.js
+	```
 	
 - Open app.js in tour favorite text editor and include Spacebrew by modifying the top of your app.js so that it looks like this:
 
@@ -56,15 +62,21 @@ For learning's sake, the following instructions will re-create the app contained
 	```
 - Create a Spacebrew client. Provide a server, name, description
 
-	```var sb = new Spacebrew.Spacebrew.Client( server, name, description );```
+	```
+	var sb = new Spacebrew.Spacebrew.Client( server, name, description );
+	```
 	
 - Add publishers and/or subscribers as described in the examples at the [Spacebrew.js repo](https://github.com/Spacebrew/spacebrew.js).
 - Connect the mofo.
 
-	```sb.connect();```
+	```
+	sb.connect();
+	```
 	
 - Run your node app!
 
-	```node app.js```
+	```
+	node app.js
+	```
 	
 - Head over to the [Spacebrew Sandbox](http://spacebrew.github.com/spacebrew/admin/admin.html?server=sandbox.spacebrew.cc) and see your app
