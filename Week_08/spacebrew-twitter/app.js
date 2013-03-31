@@ -14,17 +14,17 @@ var express = require('express')
 var app = express();
 
 app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
-  app.use(express.favicon());
-  app.use(express.logger('dev'));
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.cookieParser('your secret here'));
-  app.use(express.session());
-  app.use(app.router);
-  app.use(express.static(path.join(__dirname, 'public')));
+	app.set('port', process.env.PORT || 4000);
+	app.set('views', __dirname + '/views');
+	app.set('view engine', 'ejs');
+	app.use(express.favicon());
+	app.use(express.logger('dev'));
+	app.use(express.bodyParser());
+	app.use(express.methodOverride());
+	app.use(express.cookieParser('your secret here'));
+	app.use(express.session());
+	app.use(app.router);
+	app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
@@ -39,13 +39,15 @@ http.createServer(app).listen(app.get('port'), function(){
 });
 
 
+var keywords = "I'm listening to";
+
 //
 // 1.  Start up the Spacebrew client
 //
 
 var server = "sandbox.spacebrew.cc";
-var name = "Spatial Media Tweeter";
-var description = "A stream of twets that contain the words spatial, media, nyu, or ITP.";
+var name = "Keyword Tweeter";
+var description = "A stream of twets that contain the words '"+keywords+"'";
 var sb = new Spacebrew.Spacebrew.Client( server, name, description );
 
 sb.addPublish("tweet", "string", "A single tweet");  // create the publication feed
@@ -70,7 +72,7 @@ var twit = new twitter({
 
 // Start the twitter stream 
 // https://dev.twitter.com/docs/api/1.1/post/statuses/filter
-var filters = {'track':'spatial,media,nyu,itp'};
+var filters = { 'track':keywords };
 twit.stream('statuses/filter', filters, function(stream) {
 	stream.on('data', function (data) {
 		console.log(data.text);
