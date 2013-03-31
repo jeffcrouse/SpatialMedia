@@ -143,6 +143,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "spacebrew-casual.py",
+			"settings":
+			{
+				"buffer_size": 1285,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Python/Python.sublime-build",
 	"command_palette":
@@ -168,6 +176,7 @@
 	},
 	"file_history":
 	[
+		"/Users/jeff/Documents/SpatialMedia/Week_08/spacebrew-scrape/spacebrew-casual.py",
 		"/Users/jeff/Documents/SpatialMedia/Week_09/twilio-test/app.js",
 		"/Users/jeff/Documents/SpatialMedia/Week_09/itunes-control/sb-1.0.3.js",
 		"/Users/jeff/Documents/SpatialMedia/Week_09/itunes-control/app.js",
@@ -199,7 +208,6 @@
 		"/Users/jeff/Desktop/spacebrew-ticker/app.js",
 		"/Users/jeff/Documents/SpatialMedia/Week_08/spacebrew-scrape/README",
 		"/Users/jeff/Documents/SpatialMedia/Week_08/node-spacebrew/README",
-		"/Users/jeff/Documents/SpatialMedia/Week_08/spacebrew-scrape/spacebrew-casual.py",
 		"/Users/jeff/Documents/SpatialMedia/.gitignore",
 		"/Users/jeff/Documents/SpatialMedia/Week_08/node-spacebrew/app.js",
 		"/Users/jeff/Documents/SpatialMedia/Week_08/spacebrew-twitter/README",
@@ -462,8 +470,36 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "spacebrew-casual.py",
+					"settings":
+					{
+						"buffer_size": 1285,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1170,
+								1170
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],

@@ -8,6 +8,8 @@
   "dependencies": {
     "express": "3.1.0",
     "ejs": "*",
-    "twilio": "~1.1.0"
+    "twilio": "~1.1.0",
+    "wordpos": "~0.1.6",
+    "ws": "~0.4.25"
   }
 }

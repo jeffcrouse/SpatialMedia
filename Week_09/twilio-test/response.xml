@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Say>Welcome to Twilio!</Say>
+    <Pause length="3"></Pause>
+    <Say voice="woman" language="en-gb">Please let us know if we can help during your development.</Say>
+    <Play>http://www.example.com/some_sound.mp3</Play>
+</Response>

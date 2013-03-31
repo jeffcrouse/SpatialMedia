@@ -39,7 +39,10 @@ try:
 
 		print 'Sent %d images' % len(history)
 		time.sleep(2.5)
-
+# Catch ctrl+c
+except (KeyboardInterrupt, SystemExit):
+	print("Exiting!")
+	
 # closing out the app and returning terminal to old settings
 finally:
 	print("Stopping spacebrew");

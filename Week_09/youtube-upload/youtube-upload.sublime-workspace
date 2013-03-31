@@ -143,6 +143,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "app.js",
+			"settings":
+			{
+				"buffer_size": 3491,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Python/Python.sublime-build",
 	"command_palette":
@@ -168,6 +176,9 @@
 	},
 	"file_history":
 	[
+		"/Users/jeff/Desktop/client_secrets.json",
+		"/Users/jeff/Documents/SpatialMedia/Week_09/youtube-upload/youtube-upload.sublime-project",
+		"/Users/jeff/Documents/SpatialMedia/Week_09/simple-say/app.js",
 		"/Users/jeff/Documents/SpatialMedia/Week_09/twilio-test/app.js",
 		"/Users/jeff/Documents/SpatialMedia/Week_09/itunes-control/sb-1.0.3.js",
 		"/Users/jeff/Documents/SpatialMedia/Week_09/itunes-control/app.js",
@@ -292,10 +303,7 @@
 		"/Users/jeff/Desktop/initializr/index.html",
 		"/Users/jeff/Sites/laborers-of-love/public/js/index.js",
 		"/Users/jeff/Sites/laborers-of-love/public/css/styles.css",
-		"/Users/jeff/Sites/laborers-of-love/views/coupons.ejs",
-		"/Users/jeff/Sites/laborers-of-love/views/admin.ejs",
-		"/Users/jeff/Sites/laborers-of-love/views/lols.ejs",
-		"/Users/jeff/Sites/laborers-of-love/public/css/admin.css"
+		"/Users/jeff/Sites/laborers-of-love/views/coupons.ejs"
 	],
 	"find":
 	{
@@ -314,6 +322,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"source",
 			"json",
 			"mix.sh",
 			"moix.sh",
@@ -440,8 +449,7 @@
 			"img",
 			"img/thumbnailsimages",
 			"img/thumbnails",
-			"latitude",
-			"unlink"
+			"latitude"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -462,8 +470,37 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "app.js",
+					"settings":
+					{
+						"buffer_size": 3491,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3022,
+								3022
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1187.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],

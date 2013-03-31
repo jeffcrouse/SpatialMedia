@@ -168,6 +168,7 @@
 	},
 	"file_history":
 	[
+		"/Users/jeff/Documents/SpatialMedia/Week_09/simple-say/sb-1.0.3.js",
 		"/Users/jeff/Desktop/twilio-test/node_modules/twilio/examples/example.js",
 		"/Users/jeff/Desktop/twilio-test/app.js",
 		"/Users/jeff/Desktop/twilio-test/node_modules/twilio/examples/more.md",
@@ -294,8 +295,7 @@
 		"/Users/jeff/Sites/laborers-of-love/public/css/admin.css",
 		"/Users/jeff/Sites/laborers-of-love/public/templates/titleHelp.ejs",
 		"/Users/jeff/Sites/laborers-of-love/public/templates/sourceHelp.ejs",
-		"/Users/jeff/Sites/laborers-of-love/public/templates/sliderHelp.ejs",
-		"/Users/jeff/Sites/laborers-of-love/public/templates/couponHelp.ejs"
+		"/Users/jeff/Sites/laborers-of-love/public/templates/sliderHelp.ejs"
 	],
 	"find":
 	{
