@@ -168,6 +168,12 @@
 	},
 	"file_history":
 	[
+		"/Users/jeff/Desktop/you3b/README.md",
+		"/Users/jeff/Documents/SpatialMedia/Week_09/twilio-test/app.js",
+		"/Users/jeff/Documents/SpatialMedia/Week_08/spacebrew-twitter/app.js",
+		"/Users/jeff/Documents/SpatialMedia/Week_09/twilio-test/response.xml",
+		"/Users/jeff/Library/Caches/Cleanup At Startup/Transmit/A26FBB9B-45C9-4659-B860-B5D4C1C220D6/response.xml",
+		"/Users/jeff/Documents/SpatialMedia/Week_09/twilio-test/README.md",
 		"/Users/jeff/Documents/SpatialMedia/Week_09/simple-say/sb-1.0.3.js",
 		"/Users/jeff/Desktop/twilio-test/node_modules/twilio/examples/example.js",
 		"/Users/jeff/Desktop/twilio-test/app.js",
@@ -198,7 +204,6 @@
 		"/Users/jeff/Documents/SpatialMedia/Week_08/spacebrew-scrape/spacebrew-casual.py",
 		"/Users/jeff/Documents/SpatialMedia/.gitignore",
 		"/Users/jeff/Documents/SpatialMedia/Week_08/node-spacebrew/app.js",
-		"/Users/jeff/Documents/SpatialMedia/Week_08/spacebrew-twitter/app.js",
 		"/Users/jeff/Documents/SpatialMedia/Week_08/spacebrew-twitter/README",
 		"/Users/jeff/Documents/SpatialMedia/Week_08/spacebrew-scrape/string_client.py",
 		"/Users/jeff/Documents/SpatialMedia/Week_08/spacebrew-scrape/custom_client.py",
@@ -290,12 +295,7 @@
 		"/Users/jeff/Sites/laborers-of-love/public/js/index.js",
 		"/Users/jeff/Sites/laborers-of-love/public/css/styles.css",
 		"/Users/jeff/Sites/laborers-of-love/views/coupons.ejs",
-		"/Users/jeff/Sites/laborers-of-love/views/admin.ejs",
-		"/Users/jeff/Sites/laborers-of-love/views/lols.ejs",
-		"/Users/jeff/Sites/laborers-of-love/public/css/admin.css",
-		"/Users/jeff/Sites/laborers-of-love/public/templates/titleHelp.ejs",
-		"/Users/jeff/Sites/laborers-of-love/public/templates/sourceHelp.ejs",
-		"/Users/jeff/Sites/laborers-of-love/public/templates/sliderHelp.ejs"
+		"/Users/jeff/Sites/laborers-of-love/views/admin.ejs"
 	],
 	"find":
 	{

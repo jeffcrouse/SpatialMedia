@@ -16,26 +16,30 @@ brew.start()
 
 
 base_urls = [
-	"http://newyork.craigslist.org/cas/", 
-	"http://philadelphia.craigslist.org/cas/", 
-	"http://sfbay.craigslist.org/cas/"]
+	"http://newyork.craigslist.org/search/aap?hasPic=1", 
+	"http://philadelphia.craigslist.org/search/aap?hasPic=1", 
+	"http://sfbay.craigslist.org/search/aap?hasPic=1"]
 history = []
 try:
 	while 1:
 		for base_url in base_urls:
 			print "scraping %s" % base_url
 			doc = parse(base_url).getroot()
-			for link in doc.cssselect('p.row a'):
-				subdoc_url = link.get('href')
-				subdoc = parse(subdoc_url).getroot()
-				images = subdoc.cssselect('img#iwi')
-				print "\t%s %d images" % (subdoc_url, len(images))
-				for image in images:
-					img_url = image.get('src')
-					if img_url not in images:
-						print "\t\t%s" % (img_url)
-						brew.publish('image', img_url)
-						history.append( img_url )
+			links = doc.cssselect('span.pl a')
+			if links:
+				for link in links:
+					subdoc_url = link.get('href')
+					subdoc = parse(subdoc_url).getroot()
+					images = subdoc.cssselect('img#iwi')
+					print "\t%s %d images" % (subdoc_url, len(images))
+					for image in images:
+						img_url = image.get('src')
+						if img_url not in images:
+							print "\t\t%s" % (img_url)
+							brew.publish('image', img_url)
+							history.append( img_url )
+			else:
+				print "No links found on "+base_url
 
 		print 'Sent %d images' % len(history)
 		time.sleep(2.5)
