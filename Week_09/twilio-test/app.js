@@ -4,12 +4,10 @@
  */
 
 var express = require('express')
-	, routes = require('./routes')
-	, user = require('./routes/user')
 	, http = require('http')
 	, path = require('path')
 	, twilio = require('twilio')
-	, Spacebrew = require('./sb-1.0.3')
+	, Spacebrew = require('spacebrew')
 	, WordPOS = require('wordpos')
     , wordpos = new WordPOS()
 
@@ -33,9 +31,6 @@ app.configure(function(){
 app.configure('development', function(){
 	app.use(express.errorHandler());
 });
-
-app.get('/', routes.index);
-app.get('/users', user.list);
 
 //Twilio request authentication
 app.post('/twiml', function(req, res) {
@@ -61,7 +56,7 @@ http.createServer(app).listen(app.get('port'), function(){
 var server = "sandbox.spacebrew.cc";
 var name = "Twilio Voice Caller";
 var description = "";
-var sb = new Spacebrew.Spacebrew.Client( server, name, description );
+var sb = new Spacebrew.Client( server, name, description );
 sb.addSubscribe("words", "string");
 sb.onStringMessage = onStringMessage;
 sb.connect();
@@ -85,7 +80,7 @@ function onStringMessage(name, value) {
 				client.makeCall({
 				    to:'+16462465999', // Any number Twilio can call
 				    from: '+13473217570', // A number you bought from Twilio and can use for outbound communication
-				    url: 'http://4vjh.localtunnel.com/twiml' // A URL that produces an XML document (TwiML) which contains instructions for the call
+				    url: 'http://4zsw.localtunnel.com/twiml' // A URL that produces an XML document (TwiML) which contains instructions for the call
 				}, function(err, responseData) {
 				    console.log(responseData.from); 
 				});

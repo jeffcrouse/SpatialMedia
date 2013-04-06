@@ -1,0 +1,17 @@
+{
+  "author": {
+    "name": "Jeff Crouse",
+    "email": "jefftimesten@gmail.com"
+  },
+  "name": "sb-tweeter",
+  "description": "Spacebrew example",
+  "dependencies": {
+    "spacebrew": "0.0.1",
+    "ntwitter": "~0.5.0"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}

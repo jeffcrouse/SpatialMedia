@@ -3,46 +3,12 @@
  * Module dependencies.
  */
 
-var express = require('express')
-	, routes = require('./routes')
-	, user = require('./routes/user')
-	, http = require('http')
-	, path = require('path')
-	, util = require('util')
+var util = require('util')
 	, fs = require('fs')
 	, exec = require('child_process').exec
-	, Spacebrew = require('./sb-1.0.3')
+	, Spacebrew = require('spacebrew')
 	, youtube = require('youtube')
 	, crypto = require('crypto')
-
-var app = express();
-
-app.configure(function(){
-	app.set('port', process.env.PORT || 3000);
-	app.set('views', __dirname + '/views');
-	app.set('view engine', 'ejs');
-	app.use(express.favicon());
-	app.use(express.logger('dev'));
-	app.use(express.bodyParser());
-	app.use(express.methodOverride());
-	app.use(express.cookieParser('your secret here'));
-	app.use(express.session());
-	app.use(app.router);
-	app.use(express.static(path.join(__dirname, 'public')));
-});
-
-app.configure('development', function(){
-  app.use(express.errorHandler());
-});
-
-app.get('/', routes.index);
-app.get('/users', user.list);
-
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
-});
-
-
 
 //
 // Set up Spacebrew to accept strings ont he "words" channel
@@ -50,7 +16,7 @@ http.createServer(app).listen(app.get('port'), function(){
 var server = "sandbox.spacebrew.cc";
 var name = "Youtube Uploader";
 var description = "Accepts URLS of images.  Generates a video and eventually uploads it to YouTube";
-var sb = new Spacebrew.Spacebrew.Client( server, name, description );
+var sb = new Spacebrew.Client( server, name, description );
 sb.addSubscribe("image", "string");
 sb.onStringMessage = onStringMessage;
 sb.connect();
@@ -104,13 +70,13 @@ function makeMovie( dirname ) {
 			var title = 'Spacebrew Output '+new Date().toJSON();
 			var description = "Some images sent through Spacebrew";
 			var category = 'Education';
-			var dev_key = 'AI39si6wKltoN5L83T7NOHPOhJ5rXkfe3fAA8jVfqhc3Fhf9Nlw2k8_WGAFlmnxPjj5YdGYQ7hnXW_7LE4tbJFliNSQ--yGQfA';
+			var dev_key = 'myDevKey';
 
 			var video = youtube
 				.createUpload(path)
 				.user('jefftimesten@gmail.com')
 				.source('jefftimesten')
-				.password('FullHouse99!')
+				.password('myPassword')
 				.key(dev_key)
 				.title(title)
 				.description(title)

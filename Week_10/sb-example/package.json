@@ -1,0 +1,16 @@
+{
+  "author": {
+    "name": "Jeff Crouse",
+    "email": "jefftimesten@gmail.com"
+  },
+  "name": "spacebrew-example",
+  "description": "Spacebrew example",
+  "dependencies": {
+    "spacebrew": "0.0.1"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
