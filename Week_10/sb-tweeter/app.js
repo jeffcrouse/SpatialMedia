@@ -7,8 +7,8 @@ var Spacebrew = require('spacebrew')
 //
 // 1.  Start up the Spacebrew client
 //
-var keywords = "I'm listening to";
 
+var keywords = "today";
 var server = "sandbox.spacebrew.cc";
 var name = "Keyword Tweeter";
 var description = "A stream of twets that contain the words '"+keywords+"'";
@@ -38,9 +38,11 @@ var twit = new twitter({
 var filters = { 'track':keywords };
 twit.stream('statuses/filter', filters, function(stream) {
 	stream.on('data', function (data) {
-		console.log(data.text);
 		if(sb._isConnected) {
-			sb.send("tweet", "string", data.text); 
+			var tweet = data.text.replace(/[^\w\s]|_/g, "")
+        						 .replace(/\s+/g, " ");
+        	console.log(tweet);
+			sb.send("tweet", "string", tweet); 
 		}
 	});
 });

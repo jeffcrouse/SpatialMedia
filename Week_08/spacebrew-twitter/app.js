@@ -3,40 +3,8 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
-  , http = require('http')
-  , path = require('path')
-  , Spacebrew = require('./sb-1.0.3')
+var Spacebrew = require('spacebrew')
   , twitter = require('ntwitter') // https://github.com/AvianFlu/ntwitter
-
-var app = express();
-
-app.configure(function(){
-	app.set('port', process.env.PORT || 4000);
-	app.set('views', __dirname + '/views');
-	app.set('view engine', 'ejs');
-	app.use(express.favicon());
-	app.use(express.logger('dev'));
-	app.use(express.bodyParser());
-	app.use(express.methodOverride());
-	app.use(express.cookieParser('your secret here'));
-	app.use(express.session());
-	app.use(app.router);
-	app.use(express.static(path.join(__dirname, 'public')));
-});
-
-app.configure('development', function(){
-  app.use(express.errorHandler());
-});
-
-app.get('/', routes.index);
-app.get('/users', user.list);
-
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
-});
 
 
 var keywords = "I'm listening to";
@@ -48,7 +16,7 @@ var keywords = "I'm listening to";
 var server = "sandbox.spacebrew.cc";
 var name = "Keyword Tweeter";
 var description = "A stream of twets that contain the words '"+keywords+"'";
-var sb = new Spacebrew.Spacebrew.Client( server, name, description );
+var sb = new Spacebrew.Client( server, name, description );
 
 sb.addPublish("tweet", "string", "A single tweet");  // create the publication feed
 // connect to spacbrew
