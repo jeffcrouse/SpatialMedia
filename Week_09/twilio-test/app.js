@@ -63,7 +63,7 @@ sb.connect();
 
 
 
-var client = require('twilio')('ACcc854bb5309b0308c6f6af4aa3ececf3', 'ced5bbb0b7f9f5ffe416abe9ff6b4f0b');
+var client = require('twilio')(YOUR_TWILIO_TOKEN, YOUR_TWILIO_SECRET);
 var adjectives = [];
 var phoneMessage = "";
 function onStringMessage(name, value) {
